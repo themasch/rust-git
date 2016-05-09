@@ -21,11 +21,11 @@ impl<'a> Object for Tree<'a> {
     fn get_hash_content(&self) -> Vec<u8> {
         let buffer = self.entries.iter()
             .fold(Vec::new(), | mut buffer, entry | {
-                //buffer.extend(entry.get_mode_octal());
+                //format: [mode in ascii octal]0x20[name as utf8 string]\0x00[sha1 hash]
                 buffer.extend_from_slice(format!("{:o}", entry.mode).as_bytes());
-                buffer.extend_from_slice(" ".as_bytes());
+                buffer.push(0x20);
                 buffer.extend_from_slice(entry.name.as_bytes());
-                buffer.push(0);
+                buffer.push(0x00);
                 buffer.extend(entry.object.hash());
 
                 return buffer;
