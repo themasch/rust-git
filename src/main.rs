@@ -10,7 +10,6 @@ use tree_node::TreeNode;
 use std::io::{self, Write};
 
 fn main() {
-    //println!("Hello, world!");
     let testa = Blob::new(String::from("The quick brown fox jumps over the lazy dog").into_bytes());
     let testb = Blob::new(String::from("The quick brown fox flys over the lazy dog").into_bytes());
     let nodea = TreeNode::new(&testa, 0o100755, String::from("TestA"));
@@ -23,10 +22,8 @@ fn main() {
         Err(err) => {
             println!("{:?}", err);
         },
-        Ok(size) => {
+        Ok(_size) => {
             io::stdout().flush();
         }
     }
-    //println!("{:?}", tree.hash());
-
 }
