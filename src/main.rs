@@ -1,12 +1,9 @@
-mod object;
-mod blob;
-mod tree_node;
-mod tree;
+mod model;
 
-use object::Object;
-use blob::Blob;
-use tree::Tree;
-use tree_node::TreeNode;
+use model::object::Object;
+use model::blob::Blob;
+use model::tree::Tree;
+use model::tree_node::TreeNode;
 use std::io::{self, Write};
 
 fn main() {

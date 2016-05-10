@@ -1,4 +1,4 @@
-use object::Object;
+use model::object::Object;
 
 pub struct TreeNode<'a> {
     pub mode: u16,

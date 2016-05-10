@@ -1,5 +1,5 @@
-use object::Object;
-use tree_node::TreeNode;
+use model::object::Object;
+use model::tree_node::TreeNode;
 
 pub struct Tree<'a> {
     entries: Vec<&'a TreeNode<'a>>
