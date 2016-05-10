@@ -37,7 +37,7 @@ fn create_blob() {
 #[test]
 fn test_metadata() {
     let x = Blob::new(String::from("asdf").into_bytes());
-    assert_eq!("blob 4", x.get_metadata());
+    assert_eq!(String::from("blob 4").into_bytes(), x.get_metadata());
 }
 
 #[test]
