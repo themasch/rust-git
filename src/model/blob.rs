@@ -1,5 +1,6 @@
-use model::object::Object;
+use model::hashable::Hashable;
 
+#[derive(Debug,Clone)]
 pub struct Blob {
     content: Vec<u8>
 }
@@ -22,7 +23,7 @@ impl Blob {
     }
 }
 
-impl Object for Blob {
+impl Hashable for Blob {
     fn get_hash_content(&self) -> Vec<u8> {
         self.get_content()
     }

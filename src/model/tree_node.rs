@@ -1,13 +1,14 @@
-use model::object::Object;
+use model::hashable::Hashable;
 
-pub struct TreeNode<'a> {
+#[derive(Debug,Clone)]
+pub struct TreeNode<'b> {
     pub mode: u16,
-    pub object: &'a Object,
+    pub object: &'b Hashable,
     pub name: String
 }
 
-impl<'a>  TreeNode<'a> {
-    pub fn new(node: &'a Object, mode: u16, name: String) -> TreeNode<'a> {
+impl<'b> TreeNode<'b> {
+    pub fn new(node: &'b Hashable, mode: u16, name: String) -> TreeNode<'b> {
         TreeNode { object: node, mode: mode, name: name }
     }
 }

@@ -1,6 +1,7 @@
-use model::object::Object;
+use model::hashable::Hashable;
 use model::tree_node::TreeNode;
 
+#[derive(Debug,Clone)]
 pub struct Tree<'a> {
     entries: Vec<&'a TreeNode<'a>>
 }
@@ -16,7 +17,7 @@ impl<'a> Tree<'a> {
     }
 }
 
-impl<'a> Object for Tree<'a> {
+impl<'a> Hashable for Tree<'a> {
     // this is terrible slow. and not just slow, its just pure terrible
     fn get_hash_content(&self) -> Vec<u8> {
         let buffer = self.entries.iter()
