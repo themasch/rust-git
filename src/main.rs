@@ -15,18 +15,7 @@ use std::fs::File;
 fn read_object(data: Vec<u8>) -> Result<Object, String> {
     match str::from_utf8(&data[0..4]).unwrap() {
         "blob" => {
-            // find \0x00
-            let mut start = 4;
-            for &byte in &data[4..] {
-                start += 1;
-                if byte == 0 {
-                    break;
-                }
-            }
-            println!("start: {:?}", start);
-            let mut vec = Vec::new();
-            vec.extend_from_slice(&data[start..]);
-            let blub = Blob::new(vec);
+            let blub = Blob::from(data);
 
             println!("{:?}", str::from_utf8(&blub.get_content()));
             println!("{:?}", blub.hash());

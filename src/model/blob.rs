@@ -23,6 +23,27 @@ impl Blob {
     }
 }
 
+
+/// this does not care if the content is a blob! use with caution
+///
+impl From<Vec<u8>> for Blob {
+    fn from(data: Vec<u8>) -> Blob {
+
+        // find \0x00
+        let mut start = 4;
+        for &byte in &data[4..] {
+            start += 1;
+            if byte == 0 {
+                break;
+            }
+        }
+
+        let mut vec = Vec::new();
+        vec.extend_from_slice(&data[start..]);
+        Blob::new(vec)
+    }
+}
+
 impl Hashable for Blob {
     fn get_hash_content(&self) -> Vec<u8> {
         let metadata = self.get_metadata();
@@ -55,4 +76,16 @@ fn hash_blob() {
     let result = test.hash();
     assert_eq!(result.len(),20);
     assert_eq!(result, expected);
+}
+
+
+#[test]
+fn test_blob_from() {
+    let mut vec = Vec::new();
+    vec.extend_from_slice(include_bytes!("../../fixtures/blob.git-file.unpacked"));
+    let blob = Blob::from(vec);
+    let expect = vec![255, 235, 158, 73, 149, 185, 14, 166, 198, 50, 151, 41, 87, 111, 6, 240, 88, 208, 228, 187];
+    let result = blob.hash();
+    assert_eq!(result.len(),20);
+    assert_eq!(result, expect);
 }
