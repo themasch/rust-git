@@ -78,7 +78,6 @@ fn hash_blob() {
     assert_eq!(result, expected);
 }
 
-
 #[test]
 fn test_blob_from() {
     let mut vec = Vec::new();
