@@ -33,7 +33,6 @@ impl Hashable for Blob {
         vec.extend(content);
 
         vec
-        //format!("{:?}\0{:?}", self.get_metadata(), self.get_content())
     }
 }
 
@@ -52,7 +51,7 @@ fn test_metadata() {
 #[test]
 fn hash_blob() {
     let test = Blob::new(String::from("The quick brown fox jumps over the lazy dog").into_bytes());
-    let expected = vec![47, 212, 225, 198, 122, 45, 40, 252, 237, 132, 158, 225, 187, 118, 231, 57, 27, 147, 235, 18];
+    let expected = vec![255, 59, 182, 57, 72, 180, 178, 71, 150, 210, 172, 210, 89, 145, 95, 42, 157, 151, 38, 56];
     let result = test.hash();
     assert_eq!(result.len(),20);
     assert_eq!(result, expected);
