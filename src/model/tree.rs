@@ -1,23 +1,23 @@
 use model::hashable::Hashable;
 use model::tree_node::TreeNode;
 
-#[derive(Debug,Clone)]
-pub struct Tree<'a> {
-    entries: Vec<&'a TreeNode<'a>>
+#[derive(Debug)]
+pub struct Tree {
+    entries: Vec<TreeNode>
 }
 
-impl<'a> Tree<'a> {
-    pub fn new() -> Tree<'a> {
+impl Tree {
+    pub fn new() -> Tree {
         Tree { entries: Vec::new() }
     }
 
-    pub fn add(&mut self, obj: &'a TreeNode) -> &Tree {
+    pub fn add(&mut self, obj: TreeNode) -> &Tree {
         self.entries.push(obj);
         self
     }
 }
 
-impl<'a> Hashable for Tree<'a> {
+impl Hashable for Tree {
     // this is terrible slow. and not just slow, its just pure terrible
     fn get_hash_content(&self) -> Vec<u8> {
         let buffer = self.entries.iter()
@@ -27,7 +27,7 @@ impl<'a> Hashable for Tree<'a> {
                 buffer.push(0x20);
                 buffer.extend_from_slice(entry.name.as_bytes());
                 buffer.push(0x00);
-                buffer.extend(entry.object.hash());
+                buffer.extend((*entry.object).hash());
 
                 return buffer;
             });

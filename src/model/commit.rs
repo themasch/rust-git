@@ -8,9 +8,9 @@
 /// \0x0A
 /// [commit message]
 /// TODO: gpg signing? other infos
-pub struct Commit<'a> {
-    pub tree: &'a Tree<'a>,
-    pub parents: Vec<Commit>,
-    pub author: (Contact, TimeInfo), 
+pub struct Commit {
+    pub tree: Rc<Tree>,
+    pub parents: Vec<Rc<Commit>>,
+    pub author: (Contact, TimeInfo),
     pub committer: (Contact, TimeInfo)
 }

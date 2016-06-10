@@ -25,7 +25,15 @@ impl Blob {
 
 impl Hashable for Blob {
     fn get_hash_content(&self) -> Vec<u8> {
-        self.get_content()
+        let metadata = self.get_metadata();
+        let content = self.get_content();
+        let mut vec = Vec::with_capacity(metadata.len() + content.len() + 1);
+        vec.extend(metadata);
+        vec.push(0x00);
+        vec.extend(content);
+
+        vec
+        //format!("{:?}\0{:?}", self.get_metadata(), self.get_content())
     }
 }
 
